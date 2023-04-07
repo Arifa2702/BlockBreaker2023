@@ -20,6 +20,8 @@ const ball = {
     dy: -4, //how do ball moves up along the y axis once it deflects
 };
 
+
+
 //Creating single block property
 const blockProp = {
     w: 70,
@@ -105,9 +107,23 @@ function movePaddle(){
 function moveBall(){
     ball.x += ball.dx;
     ball.y += ball.dy;
+    
 
     //Surrounding wall collision detection(x-axis)
     //right and left walls
+    if(ball.x <=0 ) {
+        ball.dx = 4;
+
+    }
+    if(ball.x >= canvas.width) {
+        ball.dx = -4;
+    }
+    if(ball.y <=0 ) {
+        ball.dy = 4;
+    }
+    if(ball.y >= canvas.height) {
+        ball.dy = -4;
+    }
     
 
     //Surrounding wall collision detection(y-axis)
@@ -210,3 +226,133 @@ document.addEventListener('keyup', keyUp);
 
 
 
+
+
+
+
+
+//function moveBall(){
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    //Surrounding wall collision detection(x-axis)
+    //right and left walls
+    if(ball.x <=0 ) {
+        ball.dx = 4;
+
+    }
+    if(ball.x >= canvas.width) {
+        ball.dx = -4;
+    }
+
+    //Surrounding wall collision detection(y-axis)
+    //top and bottom walls
+    if(ball.y <=0 ) {
+        ball.dy = 4;
+    }
+    if(ball.y >= canvas.height) {
+        ball.dy = -4;
+    }
+    // moveBall();
+    //Paddle collision functionality
+    if(ball.x >= paddle.x && ball.x <= paddle.x+paddle.w && ball.y >= canvas.height-40 )
+    {
+        ball.dy = -4;
+    }
+
+    //Block collision functionality
+    blocks.forEach(column => {
+        column.forEach(block => {
+            if(block.visible){
+                
+            }
+        });
+    });
+
+    //Lose on missing paddle
+    if(ball.y + ball.size > canvas.height){
+        document.getElementById('GameOver').innerHTML = "Game Over!";
+        isGameOver = true;
+    }
+
+
+
+
+
+
+
+
+//Funcion to increase score as block is hit
+// function increaseScore(){
+    
+// }
+
+// //Make all blocks appear
+// function showAllBlocks(){
+//     blocks.forEach(column => {
+//         column.forEach(block => {
+//             block.visible = true;
+//         })
+//     })
+// }
+
+// function showGamePauseText(){
+    
+// }
+
+// function showLevelCompleteText(){
+    
+// }
+
+// function showGameOverText(){
+    
+// }
+// // Function called to draw all the canvas elements
+// function draw(){
+//     //clear canvas first
+//     cntxt.clearRect(0, 0, canvas.width, canvas.height);
+//     drawBall();
+//     drawScore();
+//     drawPaddle();
+//     drawBlocks();
+// }
+
+// //Update canvas animation and drawing
+// function update(){
+//     movePaddle();
+//     moveBall();
+
+//     //Drawing eveything in the update function
+//     draw();
+
+//     screen = requestAnimationFrame(update);
+//     if (score == (blockColumnCount*blockRowCount)) {
+        
+//     }else if(isGameOver){
+        
+//     }
+// }
+
+// update();
+// //restartBtn.style.visibility='hidden';
+// //Keydown event function
+// //Targetting the right and left arrow keys
+// function keyDown(e){
+//     if(e.key === 'Right' || e.key === 'ArrowRight'){
+//         paddle.dx = 8;
+//     } else if(e.key === 'Left' || e.key === 'ArrowLeft'){
+//         paddle.dx = -8; 
+//     } 
+// }
+
+// //Keyup event function
+// function keyUp(e){
+//     // console.log(e.key);
+//     if(e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'Left' || e.key === 'ArrowLeft'){
+//        paddle.dx = 0;
+//     } 
+// }
+
+// //Keyboard event handlers
+// document.addEventListener('keydown', keyDown);
+// document.addEventListener('keyup', keyUp);

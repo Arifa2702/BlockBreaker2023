@@ -20,6 +20,8 @@ const ball = {
     dy: -4, //how do ball moves up along the y axis once it deflects
 };
 
+
+
 //Creating single block property
 const blockProp = {
     w: 70,
@@ -105,9 +107,23 @@ function movePaddle(){
 function moveBall(){
     ball.x += ball.dx;
     ball.y += ball.dy;
+    
 
     //Surrounding wall collision detection(x-axis)
     //right and left walls
+    if(ball.x <=0 ) {
+        ball.dx = 4;
+
+    }
+    if(ball.x >= canvas.width) {
+        ball.dx = -4;
+    }
+    if(ball.y <=0 ) {
+        ball.dy = 4;
+    }
+    if(ball.y >= canvas.height) {
+        ball.dy = -4;
+    }
     
 
     //Surrounding wall collision detection(y-axis)
@@ -206,6 +222,62 @@ function keyUp(e){
 //Keyboard event handlers
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
+
+
+
+
+
+
+
+
+
+//function moveBall(){
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    //Surrounding wall collision detection(x-axis)
+    //right and left walls
+    if(ball.x <=0 ) {
+        ball.dx = 4;
+
+    }
+    if(ball.x >= canvas.width) {
+        ball.dx = -4;
+    }
+
+    //Surrounding wall collision detection(y-axis)
+    //top and bottom walls
+    if(ball.y <=0 ) {
+        ball.dy = 4;
+    }
+    if(ball.y >= canvas.height) {
+        ball.dy = -4;
+    }
+    // moveBall();
+    //Paddle collision functionality
+    if(ball.x >= paddle.x && ball.x <= paddle.x+paddle.w && ball.y >= canvas.height-40 )
+    {
+        ball.dy = -4;
+    }
+
+    //Block collision functionality
+    blocks.forEach(column => {
+        column.forEach(block => {
+            if(block.visible){
+                
+            }
+        });
+    });
+
+    //Lose on missing paddle
+    if(ball.y + ball.size > canvas.height){
+        document.getElementById('GameOver').innerHTML = "Game Over!";
+        isGameOver = true;
+    }
+
+
+
+
 
 
 
